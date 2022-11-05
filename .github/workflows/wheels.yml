@@ -8,8 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        #os: [ubuntu-20.04, windows-2019, macOS-11]
-        os: [ubuntu-20.04]
+        os: [ubuntu-20.04, windows-2019, macOS-11]
 
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +24,7 @@ jobs:
         # to supply options, put them in 'env', like:
         env:
            # Skip CPython 3.6 and CPython 3.7
-           CIBW_SKIP: cp36-* cp37-* pp*
+           CIBW_SKIP: pp*
 
       - uses: actions/upload-artifact@v3
         with:
