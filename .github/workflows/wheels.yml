@@ -4,13 +4,12 @@ on: [push, pull_request]
 
 jobs:
   build_wheels:
-    name: Build wheels py${{ matrix.python-version }} on ${{ matrix.os }}
+    name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         #os: [ubuntu-20.04, windows-2019, macOS-11]
         os: [ubuntu-20.04]
-        python-version: [39, 310]
 
     steps:
       - uses: actions/checkout@v3
@@ -27,6 +26,8 @@ jobs:
         env:
            # Skip CPython 3.6 and CPython 3.7
            CIBW_SKIP: cp36-* cp37-*
+           # Disable building PyPy wheels on all platforms
+           CIBW_SKIP: pp*
 
       - uses: actions/upload-artifact@v3
         with:
