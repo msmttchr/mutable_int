@@ -18,8 +18,8 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     if: ${{matrix.os }} == windows-latest
     needs: [ubuntu-latest]
-    if: ${{matrix.os }} == macOS-latest
-    needs: [ubuntu-latest, windows-latest]  
+    #if: ${{matrix.os }} == macOS-latest
+    #needs: [ubuntu-latest, windows-latest]  
     steps:
       - uses: actions/checkout@v3
 
