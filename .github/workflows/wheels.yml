@@ -5,6 +5,12 @@ on: [push, pull_request]
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
+    # to supply options, put them in 'env', like:
+    env:
+       # Skip CPython 3.6 and CPython 3.7
+       CIBW_SKIP: pp*
+       CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+       CI_COMMIT_AUTHOR: Michele Sardo
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -21,12 +27,6 @@ jobs:
 
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
-        # to supply options, put them in 'env', like:
-        env:
-           # Skip CPython 3.6 and CPython 3.7
-           CIBW_SKIP: pp*
-           CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-           CI_COMMIT_AUTHOR: Michele Sardo
 
       - uses: actions/upload-artifact@v3
         with:
