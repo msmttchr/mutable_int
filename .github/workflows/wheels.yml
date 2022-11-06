@@ -32,13 +32,13 @@ jobs:
           path: ./wheelhouse/*.whl
   store_wheels:
     # Commit and push all changed files.
-    - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
-      env:
-        CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-        CI_COMMIT_AUTHOR: Michele Sardo
-      # Only run on main branch push (e.g. after pull request merge).
-      if: github.event_name == 'push'
-      run: |
+    name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
+    env:
+      CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+      CI_COMMIT_AUTHOR: Michele Sardo
+    # Only run on main branch push (e.g. after pull request merge).
+    if: github.event_name == 'push'
+    run: |
         git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
         git config --global user.email "msmttchr@gmail.com"
         git add ./wheelhouse/*.whl
