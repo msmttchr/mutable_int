@@ -36,9 +36,12 @@ jobs:
     env:
       CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
       CI_COMMIT_AUTHOR: Michele Sardo
-    # Only run on main branch push (e.g. after pull request merge).
-    if: github.event_name == 'push'
-    run: |
+    runs-on: ubuntu-20.04
+    needs: build_wheels
+    steps:
+      # Only run on main branch push (e.g. after pull request merge).
+      if: github.event_name == 'push'
+      run: |
         git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
         git config --global user.email "msmttchr@gmail.com"
         git add ./wheelhouse/*.whl
