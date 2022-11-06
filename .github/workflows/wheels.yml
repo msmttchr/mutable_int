@@ -36,7 +36,7 @@ jobs:
       - name: copy file
         uses: canastro/copy-file-action@master
         with:
-          source: "./wheelhouse/*.whl"
+          source: "./wheelhouse/mutableint-0.2-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl"
           target: "./wheeldir"
 
       - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
