@@ -7,10 +7,8 @@ jobs:
     name: Build wheels on ${{ matrix.os }}
     # to supply options, put them in 'env', like:
     env:
-       # Skip CPython 3.6 and CPython 3.7
        CIBW_SKIP: pp*
-       CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-       CI_COMMIT_AUTHOR: Michele Sardo
+       CIBW_BUILD: cp39-manylinux
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -33,6 +31,9 @@ jobs:
           path: ./wheelhouse/*.whl
       # Commit and push all changed files.
       - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
+        env:
+          CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+          CI_COMMIT_AUTHOR: Michele Sardo
         # Only run on main branch push (e.g. after pull request merge).
         if: github.event_name == 'push'
         run: |
