@@ -33,13 +33,19 @@ jobs:
         with:
           path: ./wheelhouse/*.whl
 
+      - name: copy file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "./wheelhouse/*.whl"
+          target: "./wheeldir"
+
       - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
         # Only run on main branch push (e.g. after pull request merge).
         if: github.event_name == 'push'
         run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "msmttchr@gmail.com"
-          git add ./wheelhouse/*.whl
+          git add ./wheeldir/*.whl
           git pull
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
