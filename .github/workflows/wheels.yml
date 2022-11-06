@@ -13,13 +13,10 @@ jobs:
       CI_COMMIT_AUTHOR: Michele Sardo
     runs-on: ${{ matrix.os }}
     strategy:
+      max-parallel: 2
       matrix:
         #os: [ubuntu-latest, windows-latest, macOS-latest]
         os: [ubuntu-latest, windows-latest]
-    if: ${{matrix.os }} == windows-latest
-    needs: [ubuntu-latest]
-    #if: ${{matrix.os }} == macOS-latest
-    #needs: [ubuntu-latest, windows-latest]  
     steps:
       - uses: actions/checkout@v3
 
