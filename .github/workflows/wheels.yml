@@ -42,4 +42,5 @@ jobs:
           git config --global user.email "msmttchr@gmail.com"
           git add wheelhouse/*.whl
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git fetch
           git push
