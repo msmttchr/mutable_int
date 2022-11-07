@@ -34,12 +34,18 @@ jobs:
         with:
           path: ./wheelhouse/*.whl
 
-      - name: Copy files dummy on ${{ runner.os }}
-        if: runner.os == 'macOS'
+      - name: Copy files for macOS or Linixe
+        if: runner.os == 'macOS' || runner.os == 'Linux'
         run: |
           echo ${{ runner.os }}
           mkdir -p ./wheeldist
           cp -r ./wheelhouse/*.whl ./wheeldist
+      - name: Copy files for Windows
+        if: runner.os == 'Windows'
+        run: |
+          echo ${{ runner.os }}
+          mkdir wheeldist -ErrorAction SilentlyContinue
+          xcopy /Y .\wheelhouse\*.py .\wheeldist\
       - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
         # Only run on main branch push (e.g. after pull request merge).
         if: github.event_name == 'push'
