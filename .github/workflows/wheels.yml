@@ -16,8 +16,8 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        #os: [ubuntu-latest]
+        #os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
 
@@ -35,16 +35,17 @@ jobs:
           path: ./wheelhouse/*.whl
 
       - name: Copy files dummy on ${{ runner.os }}
-        #if: runner.os == 'Linux'
+        if: runner.os == 'Linux'
         run: |
           echo ${{ runner.os }}
+          cp -r ./wheelhouse/*.whl ./wheeldist
       - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
         # Only run on main branch push (e.g. after pull request merge).
         if: github.event_name == 'push'
         run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "msmttchr@gmail.com"
-          git add ./wheelhouse/*.whl
+          git add ./wheeldist/*.whl
           git pull
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
