@@ -35,11 +35,6 @@ jobs:
           path: ./wheelhouse/*.whl
 
       - name: Copy files dummy on ${{ runner.os }}
-        if: runner.os == 'Linux'
-        run: |
-          echo ${{ runner.os }}
-          mkdir -p ./wheeldist
-          cp -r ./wheelhouse/*.whl ./wheeldist
         if: runner.os == 'macOS'
         run: |
           echo ${{ runner.os }}
