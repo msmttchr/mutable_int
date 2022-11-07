@@ -45,7 +45,7 @@ jobs:
         run: |
           echo ${{ runner.os }}
           mkdir wheeldist -ErrorAction SilentlyContinue
-          xcopy /Y .\wheelhouse\*.py .\wheeldist\
+          xcopy /Y .\wheelhouse\*.whl .\wheeldist\
       - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
         # Only run on main branch push (e.g. after pull request merge).
         if: github.event_name == 'push'
