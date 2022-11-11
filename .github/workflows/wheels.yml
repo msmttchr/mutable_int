@@ -52,7 +52,7 @@ jobs:
         run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "msmttchr@gmail.com"
-          git add ./wheeldist/*.whl
           git pull
-          git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git add ./wheeldist/*.whl
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
